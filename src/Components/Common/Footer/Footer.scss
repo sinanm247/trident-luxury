@@ -1,0 +1,126 @@
+.home-footer {
+  background: #070707;
+  color: #fff;
+  padding-top: 34px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  padding-bottom: 34px;
+}
+
+.home-footer__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.7fr 1.6fr 0.9fr;
+  gap: 34px;
+  align-items: start;
+}
+
+.home-footer h3 {
+  margin-bottom: 14px;
+  font-size: 0.74rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.home-footer__brand img {
+  width: 160px;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+.home-footer__brand p {
+  max-width: 340px;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.78;
+  font-size: 0.86rem;
+}
+
+.home-footer__links ul {
+  display: grid;
+  gap: 10px;
+}
+
+.home-footer__links a {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.84rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.home-footer__services ul {
+  display: grid;
+  gap: 10px;
+}
+
+.home-footer__services li h4 {
+  margin-bottom: 0;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.home-footer__office {
+  display: grid;
+  gap: 8px;
+
+  p,
+  a {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.84rem;
+    line-height: 1.65;
+  }
+
+  a:hover {
+    color: #fff;
+  }
+}
+
+.home-footer__bottom {
+  margin-top: 34px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+
+  p {
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.58);
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.82);
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  .home-footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .home-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .home-footer__bottom p {
+    font-size: 0.68rem;
+    line-height: 1.6;
+  }
+}

@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+// --- Website theme palette (active) ---
+$primary: #000000;     // Black
+$secondary: #ffffff;   // White
+
+$black: #000000;
+$white: #ffffff;
+
+:root {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --global-title-size: clamp(1.7rem, 3.4vw, 3rem);
+  --global-title-weight: 400;
+  --global-title-letter-spacing: 0.04em;
+  --global-title-color: rgba(255, 255, 255, 0.84);
+
+  color: $primary;
+  background-color: $secondary;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Titles and subtitles – Pawcinno */
+h1, h2, h3, h4, h5, h6,
+.main-title, .top-title,
+.font-title {
+  font-family: 'Roboto', sans-serif;
+}
+
+.global-title {
+  font-size: var(--global-title-size);
+  font-weight: var(--global-title-weight);
+  letter-spacing: var(--global-title-letter-spacing);
+  color: var(--global-title-color);
+  text-transform: uppercase;
+}
+
+html {
+  /* scroll-snap-type: y mandatory; */
+  scroll-behavior: smooth;
+  scroll-snap-type: none;
+}
+
+section{
+  height: 100%;
+  scroll-snap-align: center;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+  transition: .5s;
+  color: $white;
+}
+
+a:hover {
+  transition: .5s;
+}
+
+button,
+input,
+textarea {
+  font-family: 'Roboto', sans-serif;
+}
+
+.section-container {
+  padding-left: 300px;
+  padding-right: 300px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+
+  @media (max-width: 2000px) {
+    padding-left: 250px;
+    padding-right: 250px;
+  }
+
+  @media (max-width: 1800px) {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+
+  @media (max-width: 1600px) {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  
+  @media (max-width: 768px) {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  @media (max-width: 500px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
