@@ -1,5 +1,5 @@
-import { Fragment, useEffect, useLayoutEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Fragment, useLayoutEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { APP_LOADER_DURATION_MS } from './constants/appLoader';
 import { AppLoaderContext } from './context/AppLoaderContext';
 import AppLoader from './Components/AppLoader/AppLoader';
@@ -8,25 +8,84 @@ import routes from './routes/routes.jsx';
 import Header from './Components/Common/Header/Header.jsx';
 import Footer from './Components/Common/Footer/Footer';
 
+const PRE_NAVIGATION_LOADER_LEAD_MS = 220;
+
 
 export default function App() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [ pageLoading, setPageLoading ] = useState(true);
+  const loaderTimeoutRef = useRef(null);
+  const preNavigationTimeoutRef = useRef(null);
+  const bypassNextClickRef = useRef(false);
 
-  /** SPA route changes do not reset scroll — new pages inherit prior scrollY (e.g. long home → portfolio looks “stuck” at bottom). */
+  /** On route change, show loader before paint and reset scroll position. */
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+    if (loaderTimeoutRef.current) {
+      clearTimeout(loaderTimeoutRef.current);
+    }
 
-  useEffect(() => {
     setPageLoading(true);
+    window.scrollTo(0, 0);
 
-    const timeout = setTimeout(() => {
+    loaderTimeoutRef.current = setTimeout(() => {
       setPageLoading(false);
     }, APP_LOADER_DURATION_MS);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      if (loaderTimeoutRef.current) {
+        clearTimeout(loaderTimeoutRef.current);
+      }
+    };
   }, [location.pathname]);
+
+  useLayoutEffect(() => {
+    const onDocumentClick = (event) => {
+      if (event.defaultPrevented || bypassNextClickRef.current) return;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+      const anchor = event.target.closest('a[href]');
+      if (!anchor) return;
+      if (anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+
+      const href = anchor.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+
+      const targetUrl = new URL(href, window.location.origin);
+      if (targetUrl.origin !== window.location.origin) return;
+
+      const nextPath = `${targetUrl.pathname}${targetUrl.search}${targetUrl.hash}`;
+      const currentPath = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+      if (nextPath === currentPath) return;
+
+      event.preventDefault();
+
+      if (loaderTimeoutRef.current) {
+        clearTimeout(loaderTimeoutRef.current);
+      }
+      if (preNavigationTimeoutRef.current) {
+        clearTimeout(preNavigationTimeoutRef.current);
+      }
+
+      setPageLoading(true);
+
+      preNavigationTimeoutRef.current = setTimeout(() => {
+        bypassNextClickRef.current = true;
+        navigate(nextPath);
+        setTimeout(() => {
+          bypassNextClickRef.current = false;
+        }, 0);
+      }, PRE_NAVIGATION_LOADER_LEAD_MS);
+    };
+
+    document.addEventListener('click', onDocumentClick, true);
+    return () => {
+      document.removeEventListener('click', onDocumentClick, true);
+      if (preNavigationTimeoutRef.current) {
+        clearTimeout(preNavigationTimeoutRef.current);
+      }
+    };
+  }, [navigate]);
 
   return (
     <AppLoaderContext.Provider

@@ -1,5 +1,6 @@
 import "./FeaturedPortfolio.scss";
 import { portfolioData } from "../../../Datasets/portfolio";
+import { Link } from "react-router-dom";
 import banner1 from "../../../assets/Banner/Image-2.png";
 import banner2 from "../../../assets/Banner/Image-5.png";
 import banner3 from "../../../assets/Banner/Image-8.png";
@@ -62,14 +63,12 @@ export default function FeaturedPortfolio() {
             <p className="portfolio-card__meta">
               {entry.developer} | Launch Date: {entry.launchDate}
             </p>
-            <a
+            <Link
               className="portfolio-card__link"
-              href={entry.toolkitLink}
-              target="_blank"
-              rel="noreferrer"
+              to={`/portfolio/${entry.slug}`}
             >
-              View Toolkit
-            </a>
+              Read more
+            </Link>
           </article>
         ))}
       </div>

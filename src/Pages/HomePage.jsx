@@ -2,10 +2,10 @@ import HomeHero from "../Components/HomePage/HomeHero/HomeHero";
 import AboutUs from "../Components/HomePage/AboutUs/AboutUs";
 import HomeStats from "../Components/HomePage/HomeStats/HomeStats";
 import FeaturedPortfolio from "../Components/HomePage/FeaturedPortfolio/FeaturedPortfolio";
-import HomeCta from "../Components/HomePage/HomeCta/HomeCta";
+import CommonCta from "../Components/Common/CommonCta/CommonCta";
 import HomeProcess from "../Components/HomePage/HomeProcess/HomeProcess";
 import HomeClients from "../Components/HomePage/HomeClients/HomeClients";
-import HomeContact from "../Components/HomePage/HomeContact/HomeContact";
+import ContactSection from "../Components/Common/ContactSection/ContactSection";
 
 export default function HomePage() {
     return (
@@ -15,9 +15,9 @@ export default function HomePage() {
             <HomeStats />
             <FeaturedPortfolio />
             <HomeClients />
-            <HomeCta />
+            <CommonCta />
             <HomeProcess />
-            <HomeContact />
+            <ContactSection />
         </div>
     )
 }

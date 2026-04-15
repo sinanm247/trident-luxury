@@ -8,7 +8,7 @@
   z-index: 9999;
   overflow: hidden;
   pointer-events: none;
-  transition: opacity 0.9s cubic-bezier(0.6, 0.06, 0.22, 1), visibility 0.9s step-end;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
   opacity: 0;
   visibility: hidden;
 
@@ -55,8 +55,7 @@
 }
 
 .app-shell {
-  opacity: 0;
-  transition: opacity 0.65s ease;
+  opacity: 1;
 }
 
 .app-shell.is-ready {

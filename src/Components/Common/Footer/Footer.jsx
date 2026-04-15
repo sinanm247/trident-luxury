@@ -64,13 +64,20 @@ export default function Footer() {
       </div>
 
       <div className="home-footer__bottom">
-        <p>© {new Date().getFullYear()} Trident Luxury Real Estate. All rights reserved.</p>
-        <p>
-          Made with love. Website by{" "}
+        <div className="home-footer__bottom-row">
+          <ul className="home-footer__legal-links" aria-label="Legal links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+          <p>© {new Date().getFullYear()} Trident Luxury Real Estate. All rights reserved.</p>
+        </div>
+
+        <p className="home-footer__made-with-love">
+          Crafted by{" "}
           <a href="https://media247.digital/" target="_blank" rel="noreferrer">
-            MEDIA247 digital
+            MEDIA247 Digital
           </a>
-          .
         </p>
       </div>
     </footer>

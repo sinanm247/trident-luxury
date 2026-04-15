@@ -1,5 +1,6 @@
 import "./Header.scss";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import logoWhite from "../../../assets/Logo/Logo-White-2.png";
 
 export default function Header() {
@@ -17,16 +18,16 @@ export default function Header() {
 
   return (
     <header className={`site-header section-container ${isScrolled ? "is-scrolled" : ""}`}>
-      <a href="#home" className="brand" aria-label="Trident Luxury Home">
+      <Link to="/" className="brand" aria-label="Trident Luxury Home">
         <img src={logoWhite} alt="Trident Luxury Real Estate" />
-      </a>
+      </Link>
 
       <nav aria-label="Primary navigation">
         <ul className="nav-links">
-          <li><a href="#">ABOUT US</a></li>
-          <li><a href="#">OUR SERVICES</a></li>
-          <li><a href="#">OUR PORTFOLIO</a></li>
-          <li><a href="#">CONTACT US</a></li>
+          <li><Link to="/about-us">ABOUT US</Link></li>
+          <li><Link to="/services">OUR SERVICES</Link></li>
+          <li><Link to="/portfolio">OUR PORTFOLIO</Link></li>
+          <li><Link to="/contact-us">CONTACT US</Link></li>
         </ul>
       </nav>
     </header>

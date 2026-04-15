@@ -106,20 +106,20 @@
 }
 
 .portfolio-card__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   width: fit-content;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
   font-size: 0.68rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.9);
-  padding-bottom: 3px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.44);
+  padding: 9px 14px;
+  transition: all 0.3s ease;
 
   &:hover {
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.78);
+    background: #fff;
+    color: #000;
+    border-color: #fff;
   }
 }
 
