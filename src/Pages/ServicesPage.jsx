@@ -1,7 +1,7 @@
 import CommonHero from "../Components/Common/CommonHero/CommonHero";
 import CommonCta from "../Components/Common/CommonCta/CommonCta";
 import ServicesSection from "../Components/ServicesPage/ServicesSection/ServicesSection";
-import serviceHeroImage from "../assets/Banner/Image-10.png";
+import serviceHeroImage from "../assets/Banner/Image-10.webp";
 
 export default function ServicesPage() {
   return (

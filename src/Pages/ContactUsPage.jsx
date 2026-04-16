@@ -2,7 +2,7 @@ import CommonHero from "../Components/Common/CommonHero/CommonHero";
 import ContactSection from "../Components/Common/ContactSection/ContactSection";
 import ContactDetailsSection from "../Components/ContactUsPage/ContactDetailsSection/ContactDetailsSection";
 import ContactMapSection from "../Components/ContactUsPage/ContactMapSection/ContactMapSection";
-import contactHeroImage from "../assets/Banner/Image-10.png";
+import contactHeroImage from "../assets/Banner/Image-10.webp";
 
 export default function ContactUsPage() {
   return (

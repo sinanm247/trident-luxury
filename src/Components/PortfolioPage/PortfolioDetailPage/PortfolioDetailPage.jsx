@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { FiX } from "react-icons/fi";
@@ -10,18 +10,40 @@ export default function PortfolioDetailPage() {
   const portfolio = getPortfolioBySlug(slug);
   const [sliderIndex, setSliderIndex] = useState(0);
   const [activeImageIndex, setActiveImageIndex] = useState(null);
+  const touchStartX = useRef(null);
+  const isSwipeGesture = useRef(false);
+  const [visibleSlideCount, setVisibleSlideCount] = useState(
+    typeof window !== "undefined" && window.innerWidth < 768 ? 1 : 2
+  );
 
   const galleryImages = useMemo(() => {
     if (!portfolio) return [];
     return portfolio.allImages.length ? portfolio.allImages : [portfolio.thumbnail, ...portfolio.gallery];
   }, [portfolio]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const onResize = () => {
+      setVisibleSlideCount(window.innerWidth < 768 ? 1 : 2);
+    };
+
+    onResize();
+    window.addEventListener("resize", onResize);
+
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    setSliderIndex((prev) => Math.min(prev, Math.max(galleryImages.length - visibleSlideCount, 0)));
+  }, [galleryImages.length, visibleSlideCount]);
+
   if (!portfolio) {
     return <Navigate to="/portfolio" replace />;
   }
 
-  const maxSliderIndex = Math.max(galleryImages.length - 2, 0);
-  const visibleImages = galleryImages.slice(sliderIndex, sliderIndex + 2);
+  const maxSliderIndex = Math.max(galleryImages.length - visibleSlideCount, 0);
+  const visibleImages = galleryImages.slice(sliderIndex, sliderIndex + visibleSlideCount);
   const isLightboxOpen = activeImageIndex !== null;
 
   const goSliderPrev = () => setSliderIndex((prev) => Math.max(prev - 1, 0));
@@ -29,6 +51,26 @@ export default function PortfolioDetailPage() {
   const goLightboxPrev = () =>
     setActiveImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
   const goLightboxNext = () => setActiveImageIndex((prev) => (prev + 1) % galleryImages.length);
+  const handleSwipeStart = (clientX) => {
+    touchStartX.current = clientX;
+    isSwipeGesture.current = false;
+  };
+  const handleSwipeEnd = (clientX) => {
+    if (touchStartX.current === null) return;
+
+    const deltaX = touchStartX.current - clientX;
+    const swipeThreshold = 40;
+
+    if (deltaX > swipeThreshold) {
+      isSwipeGesture.current = true;
+      goSliderNext();
+    } else if (deltaX < -swipeThreshold) {
+      isSwipeGesture.current = true;
+      goSliderPrev();
+    }
+
+    touchStartX.current = null;
+  };
 
   return (
     <div className="portfolio-detail-page">
@@ -102,7 +144,22 @@ export default function PortfolioDetailPage() {
                   key={`${portfolio.slug}-gallery-${realIndex + 1}`}
                   type="button"
                   className="portfolio-detail-gallery__item"
-                  onClick={() => setActiveImageIndex(realIndex)}
+                  onClick={() => {
+                    if (isSwipeGesture.current) {
+                      isSwipeGesture.current = false;
+                      return;
+                    }
+
+                    setActiveImageIndex(realIndex);
+                  }}
+                  onTouchStart={(event) => handleSwipeStart(event.touches[0].clientX)}
+                  onTouchEnd={(event) => handleSwipeEnd(event.changedTouches[0].clientX)}
+                  onMouseDown={(event) => handleSwipeStart(event.clientX)}
+                  onMouseUp={(event) => handleSwipeEnd(event.clientX)}
+                  onMouseLeave={() => {
+                    touchStartX.current = null;
+                    isSwipeGesture.current = false;
+                  }}
                   aria-label={`Open gallery image ${realIndex + 1}`}
                 >
                   <img src={image} alt={`${portfolio.projectName} gallery ${realIndex + 1}`} />

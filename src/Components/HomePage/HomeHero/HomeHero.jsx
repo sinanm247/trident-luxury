@@ -1,10 +1,10 @@
 import "./HomeHero.scss";
 import { useState, useEffect } from "react";
-import banner1 from "../../../assets/Banner/Image-2.png";
-import banner2 from "../../../assets/Banner/Image-5.png";
-import banner3 from "../../../assets/Banner/Image-8.png";
-import banner4 from "../../../assets/Banner/Image-10.png";
-import banner5 from "../../../assets/Banner/Image-12.png";
+import banner1 from "../../../assets/Banner/Image-2.webp";
+import banner2 from "../../../assets/Banner/Image-5.webp";
+import banner3 from "../../../assets/Banner/Image-8.webp";
+import banner4 from "../../../assets/Banner/Image-10.webp";
+import banner5 from "../../../assets/Banner/Image-12.webp";
 
 const SLIDE_INTERVAL = 4000; // 4 seconds
 

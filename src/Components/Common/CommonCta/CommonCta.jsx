@@ -1,5 +1,5 @@
 import "./CommonCta.scss";
-import defaultBackground from "../../../assets/Banner/Image-7.png";
+import defaultBackground from "../../../assets/Banner/Image-12.webp";
 
 export default function CommonCta({
   label = "Start Your Property Journey",

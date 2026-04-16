@@ -201,11 +201,22 @@
   }
 
   .portfolio-listing-card__logo-wrap {
-    width: 68px;
-    height: 68px;
+    width: 70px;
+    height: 35px;
   }
 
   .portfolio-listing-card__title {
     font-size: 1.04rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .portfolio-listing-card {
+    aspect-ratio: 4 / 3;
+    min-height: 200px;
+  }
+
+  .portfolio-listing-card__meta {
+    display: none;
   }
 }

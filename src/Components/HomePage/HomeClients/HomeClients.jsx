@@ -12,7 +12,7 @@ export default function HomeClients() {
   return (
     <section className="home-clients section-container" aria-label="Our clients">
       <div className="home-clients__header">
-        <p className="home-clients__label">Our Clients</p>
+        <p className="home-clients__label">Our Partners</p>
         <h2 className="global-title">Trusted Development Partners</h2>
       </div>
 

@@ -1,7 +1,7 @@
 import CommonHero from "../Components/Common/CommonHero/CommonHero";
 import CommonCta from "../Components/Common/CommonCta/CommonCta";
 import PortfolioListing from "../Components/PortfolioPage/PortfolioListing/PortfolioListing";
-import portfolioHeroImage from "../assets/Banner/Image-12.png";
+import portfolioHeroImage from "../assets/Banner/Image-12.webp";
 
 export default function PortfolioPage() {
   return (

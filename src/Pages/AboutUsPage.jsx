@@ -3,7 +3,7 @@ import CommonCta from "../Components/Common/CommonCta/CommonCta";
 import AboutIntroSection from "../Components/AboutUsPage/AboutIntroSection/AboutIntroSection";
 import MissionVisionSection from "../Components/AboutUsPage/MissionVisionSection/MissionVisionSection";
 import WhyChooseUsSection from "../Components/AboutUsPage/WhyChooseUsSection/WhyChooseUsSection";
-import aboutHeroImage from "../assets/Banner/Image-11.png";
+import aboutHeroImage from "../assets/Banner/Image-11.webp";
 
 export default function AboutUsPage() {
   return (
