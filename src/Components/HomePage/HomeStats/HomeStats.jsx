@@ -3,23 +3,23 @@ import "./HomeStats.scss";
 
 const stats = [
   {
-    target: 8.0,
-    prefix: "$",
-    suffix: " Billion",
-    decimals: 1,
-    label: "Portfolio Value",
+    target: 500,
+    prefix: "AED ",
+    suffix: "M+",
+    decimals: 0,
+    label: "Total Transaction Value Advised",
   },
   {
-    target: 4.5,
-    suffix: " Million",
-    decimals: 1,
-    label: "Sq. Ft. of Portfolio",
+    target: 50,
+    suffix: "+",
+    decimals: 0,
+    label: "Off-Plan Projects in Active Portfolio",
   },
   {
-    target: 2.0,
-    suffix: " Million",
-    decimals: 1,
-    label: "Sq. Ft. in Development",
+    target: 10,
+    suffix: "+",
+    decimals: 0,
+    label: "Years of Combined Dubai Market Expertise",
   },
 ];
 

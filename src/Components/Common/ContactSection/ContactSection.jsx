@@ -1,5 +1,6 @@
 import "./ContactSection.scss";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { sendContactFormEmail } from "../../../Utils/emailService";
 
 const highlights = [
@@ -31,6 +32,7 @@ const highlights = [
 ];
 
 export default function ContactSection() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,6 +40,7 @@ export default function ContactSection() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({ type: "", message: "" });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -49,17 +52,30 @@ export default function ContactSection() {
     if (isSubmitting) return;
 
     setIsSubmitting(true);
+    setSubmitStatus({ type: "", message: "" });
     const result = await sendContactFormEmail({
       ...formData,
       source: "Contact Form",
     });
 
     if (result?.success) {
+      setSubmitStatus({
+        type: "success",
+        message: "Thank you for your message. Redirecting to the thank you page...",
+      });
       setFormData({
         name: "",
         email: "",
         phone: "",
         message: "",
+      });
+      setTimeout(() => {
+        navigate("/thank-you");
+      }, 900);
+    } else {
+      setSubmitStatus({
+        type: "error",
+        message: "Failed to send message. Please try again.",
       });
     }
 
@@ -115,6 +131,11 @@ export default function ContactSection() {
           <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Sending..." : "Send Enquiry"}
           </button>
+          {submitStatus.message ? (
+            <p className={`contact-section__submit-message contact-section__submit-message--${submitStatus.type}`}>
+              {submitStatus.message}
+            </p>
+          ) : null}
         </form>
       </div>
     </section>

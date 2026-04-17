@@ -133,6 +133,21 @@
   }
 }
 
+.contact-section__submit-message {
+  margin-top: 4px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+
+  &--success {
+    color: rgba(139, 232, 168, 0.95);
+  }
+
+  &--error {
+    color: rgba(255, 144, 144, 0.95);
+  }
+}
+
 @media (max-width: 1024px) {
   .contact-section__grid {
     grid-template-columns: 1fr;

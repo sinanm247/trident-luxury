@@ -1,5 +1,3 @@
-import { toast } from "react-toastify";
-
 // Google Apps Script Web App URL - Replace with your deployed web app URL
 // To get this URL: Deploy > New deployment > Web app > Copy the URL
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuwqOtTWNNHBPF85SxrCPjmjc2RaDT5yMcHUdEHdxf7CpJBloQgWkRGYHTli4vCs9J/exec";
@@ -107,14 +105,12 @@ export const sendContactFormEmail = async (formData) => {
         const result = await sendToGoogleSheets(formDataWithSource);
 
         if (result.success) {
-            toast.success("Thank you for your message! We'll get back to you soon.");
             return { success: true, message: "Data saved successfully" };
         } else {
             throw new Error(result.error || "Failed to save data");
         }
     } catch (error) {
         console.error("Form submission error:", error);
-        toast.error("Failed to send message. Please try again.");
         return { success: false, error: error.message || error };
     }
 };

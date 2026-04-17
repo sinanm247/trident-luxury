@@ -4,6 +4,8 @@ import ServicesPage from "../Pages/ServicesPage";
 import PortfolioPage from "../Pages/PortfolioPage";
 import PortfolioDetailPage from "../Components/PortfolioPage/PortfolioDetailPage/PortfolioDetailPage";
 import ContactUsPage from "../Pages/ContactUsPage";
+import ThankYou from "../Components/ThankYou/ThankYou";
+import PageNotFound from "../Components/PageNotFound/PageNotFound";
 
 const routes = [
     {
@@ -29,6 +31,18 @@ const routes = [
     {
         path: '/contact-us',
         element: <ContactUsPage />
+    },
+    {
+        path: '/thank-you',
+        element: <ThankYou />
+    },
+    {
+        path: '/page-not-found',
+        element: <PageNotFound />
+    },
+    {
+        path: '*',
+        element: <PageNotFound />
     },
 ]
 
