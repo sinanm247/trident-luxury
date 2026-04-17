@@ -1,4 +1,6 @@
 import "./ContactSection.scss";
+import { useState } from "react";
+import { sendContactFormEmail } from "../../../Utils/emailService";
 
 const highlights = [
   {
@@ -29,6 +31,41 @@ const highlights = [
 ];
 
 export default function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    const result = await sendContactFormEmail({
+      ...formData,
+      source: "Contact Form",
+    });
+
+    if (result?.success) {
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    }
+
+    setIsSubmitting(false);
+  };
+
   return (
     <section className="contact-section section-container" id="contact" aria-label="Contact us">
       <div className="contact-section__grid">
@@ -45,30 +82,39 @@ export default function ContactSection() {
           </ul>
         </div>
 
-        <form className="contact-section__form" onSubmit={(event) => event.preventDefault()}>
+        <form className="contact-section__form" onSubmit={handleSubmit}>
           <p className="contact-section__form-label">Book a Consultation</p>
 
           <label>
             Full Name
-            <input type="text" name="name" placeholder="Your name" />
+            <input type="text" name="name" placeholder="Your name" value={formData.name} onChange={handleChange} required />
           </label>
 
           <label>
             Email Address
-            <input type="email" name="email" placeholder="name@email.com" />
+            <input type="email" name="email" placeholder="name@email.com" value={formData.email} onChange={handleChange} required />
           </label>
 
           <label>
             Phone Number
-            <input type="tel" name="phone" placeholder="+971" />
+            <input type="tel" name="phone" placeholder="+971" value={formData.phone} onChange={handleChange} required />
           </label>
 
           <label>
             Message
-            <textarea name="message" rows="4" placeholder="Tell us about your requirement" />
+            <textarea
+              name="message"
+              rows="4"
+              placeholder="Tell us about your requirement"
+              value={formData.message}
+              onChange={handleChange}
+              required
+            />
           </label>
 
-          <button type="submit">Send Enquiry</button>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Sending..." : "Send Enquiry"}
+          </button>
         </form>
       </div>
     </section>

@@ -1,5 +1,7 @@
 import { Fragment, useLayoutEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { APP_LOADER_DURATION_MS } from './constants/appLoader';
 import { AppLoaderContext } from './context/AppLoaderContext';
 import AppLoader from './Components/AppLoader/AppLoader';
@@ -99,6 +101,7 @@ export default function App() {
           <Footer />
         </Fragment>
       </div>
+      <ToastContainer position="top-right" autoClose={3500} newestOnTop closeOnClick />
     </AppLoaderContext.Provider>
   );
 }
