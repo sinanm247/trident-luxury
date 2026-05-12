@@ -25,7 +25,7 @@ export default function ContactMapSection() {
         <div className="contact-map__frame-wrap">
           <iframe
             title="Trident Luxury Real Estate map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4031.850839810167!2d55.165913775708354!3d25.097103435747044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6bbdd3b82d51%3A0x7568a197f5b0b2f7!2sMedia247%20Digital!5e1!3m2!1sen!2sae!4v1776258603237!5m2!1sen!2sae"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2228.246273088269!2d55.28868269338402!3d25.19430768402011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6823cb19cfc7%3A0x2bc0386a76611149!2sA4%20-%20Al%20Asayel%20St%20-%20Business%20Bay%20-%20Dubai!5e1!3m2!1sen!2sae!4v1777620332577!5m2!1sen!2sae"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />

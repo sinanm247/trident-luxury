@@ -10,7 +10,18 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+# Archives of production build (do not commit)
+dist.zip
+dist*.zip
 *.local
+
+# Keep server-side / private integration code out of the repo (maintain a private copy).
+google-apps-script-code.gs
+
+# Local env files (e.g. if you move the Google Script URL to Vite env vars)
+.env
+.env.local
+.env.*.local
 
 # Editor directories and files
 .vscode/*

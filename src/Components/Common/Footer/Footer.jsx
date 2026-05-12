@@ -73,12 +73,12 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} Trident Luxury Real Estate. All rights reserved.</p>
         </div>
 
-        <p className="home-footer__made-with-love">
+        {/* <p className="home-footer__made-with-love">
           Crafted by{" "}
           <a href="https://media247.digital/" target="_blank" rel="noreferrer">
             MEDIA247 Digital
           </a>
-        </p>
+        </p> */}
       </div>
     </footer>
   );

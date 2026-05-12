@@ -19,8 +19,8 @@ const SHEET1_HEADERS = [
 ];
 
 // Email recipients for notifications
-// const SHEET1_RECIPIENTS = "info@tridentluxury.ae";
-const SHEET1_RECIPIENTS = "sinan@media247.digital";
+const SHEET1_RECIPIENTS = "info@tridentluxury.ae";
+// const SHEET1_RECIPIENTS = "sinan@media247.digital";
 
 // Sheet link
 const SHEET1_LINK = "https://docs.google.com/spreadsheets/d/1GfrP4a8zeXLIpxmutBgNfhnxBfs4we2NhgkTZHaOB9Y/edit?gid=0#gid=0";

@@ -3,11 +3,10 @@ import "./HomeStats.scss";
 
 const stats = [
   {
-    target: 500,
-    prefix: "AED ",
-    suffix: "M+",
+    target: 10,
+    suffix: "+",
     decimals: 0,
-    label: "Total Transaction Value Advised",
+    label: "Years of Combined Dubai Market Expertise",
   },
   {
     target: 50,
@@ -16,10 +15,11 @@ const stats = [
     label: "Off-Plan Projects in Active Portfolio",
   },
   {
-    target: 10,
-    suffix: "+",
+    target: 500,
+    prefix: "AED ",
+    suffix: "M+",
     decimals: 0,
-    label: "Years of Combined Dubai Market Expertise",
+    label: "Total Transaction Value Advised",
   },
 ];
 
