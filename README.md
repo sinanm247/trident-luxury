@@ -28,6 +28,8 @@ High-level map of important folders (excluding large `src/assets` trees):
 ├── vite.config.js
 ├── public/                 # Copied to site root on build (favicons, robots.txt, sitemap.xml)
 ├── README.md               # This file
+├── docs/
+│   └── Project-Handbook.html  # Same guide as printable HTML (browser → Print → Save as PDF)
 └── src/
     ├── main.jsx            # React root + BrowserRouter
     ├── App.jsx             # Layout: header, footer, route loader, in-app navigation behavior

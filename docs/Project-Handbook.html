@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trident Luxury Real Estate — Website Project Handbook</title>
+  <style>
+    :root {
+      --text: #1a1a1a;
+      --muted: #444;
+      --border: #ccc;
+      --bg-code: #f5f5f5;
+      --accent: #0d3b2c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      line-height: 1.55;
+      color: var(--text);
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      font-size: 11pt;
+    }
+    h1 {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.35rem;
+      margin-top: 0;
+    }
+    h2 {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      color: var(--accent);
+    }
+    h3 {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 1.05rem;
+      margin-top: 1.35rem;
+    }
+    p, li { color: var(--text); }
+    .lead { font-size: 1.05rem; color: var(--muted); }
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.92rem;
+      margin: 1rem 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.6rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #f0f4f2; font-weight: 600; }
+    code, pre {
+      font-family: ui-monospace, "Cascadia Code", "Consolas", monospace;
+      font-size: 0.88em;
+    }
+    code {
+      background: var(--bg-code);
+      padding: 0.12em 0.35em;
+      border-radius: 3px;
+    }
+    pre {
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.85rem 1rem;
+      overflow-x: auto;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      white-space: pre;
+    }
+    .note {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.88rem;
+      background: #f8f6ef;
+      border-left: 4px solid #c9a227;
+      padding: 0.75rem 1rem;
+      margin: 1.5rem 0;
+    }
+    ol ol, ul ul { margin: 0.35rem 0; }
+    @media print {
+      body { max-width: none; padding: 0; font-size: 10pt; }
+      .note { break-inside: avoid; }
+      h2 { break-after: avoid; }
+      pre, table { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <p class="note"><strong>Using this file as PDF:</strong> Open in Chrome, Safari, or Edge → <em>Print</em> → choose <em>Save as PDF</em>. Same content as <code>README.md</code> in the repository.</p>
+
+  <h1>Trident Luxury Real Estate — Website</h1>
+
+  <p class="lead">Marketing and portfolio site for <strong>Trident Luxury Real Estate</strong> (Dubai property advisory). Built as a single-page application (SPA) with React and Vite: public pages, filterable portfolio, project detail views, and contact forms that post to Google Sheets via Google Apps Script.</p>
+
+  <hr />
+
+  <h2>Tech stack</h2>
+  <table>
+    <thead><tr><th>Area</th><th>Choice</th></tr></thead>
+    <tbody>
+      <tr><td>UI</td><td>React 19</td></tr>
+      <tr><td>Routing</td><td>React Router 7 (<code>BrowserRouter</code>)</td></tr>
+      <tr><td>Build</td><td>Vite 8</td></tr>
+      <tr><td>Styles</td><td>SCSS / Sass</td></tr>
+      <tr><td>Icons</td><td><code>react-icons</code></td></tr>
+      <tr><td>Notifications</td><td><code>react-toastify</code></td></tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <h2>Repository layout</h2>
+  <p>High-level map of important folders (excluding large <code>src/assets</code> trees):</p>
+  <pre>.
+├── index.html              # Root HTML: title, meta description, OG/Twitter, favicon links
+├── package.json
+├── vite.config.js
+├── public/                 # Copied to site root on build (favicons, robots.txt, sitemap.xml)
+├── README.md               # Markdown project doc
+└── src/
+    ├── main.jsx            # React root + BrowserRouter
+    ├── App.jsx             # Layout: header, footer, route loader, in-app navigation behavior
+    ├── index.scss          # Global styles entry
+    ├── routes/
+    │   └── routes.jsx      # Route table → page components
+    ├── Pages/              # Top-level route screens (thin wrappers)
+    ├── Components/         # Feature and shared UI (grouped by page or Common/)
+    ├── Datasets/
+    │   └── portfolio.js    # Portfolio entries, slug logic, gallery/logo resolution
+    ├── Utils/
+    │   └── emailService.js # Contact / lead submission → Google Apps Script web app URL
+    ├── context/            # e.g. app loader state
+    ├── constants/
+    └── assets/             # Images, PDFs, portfolio media (heavy)
+        ├── Portfolio/
+        │   ├── Meraas/
+        │   ├── Nakheel/
+        │   └── Dubai Properties/   # folder name "Dubai Properties" (matches dataset)
+        ├── Banner/, Services/, Clients/, Common/, Logo/, Gallery/</pre>
+
+  <p>Routing lives in <code>src/routes/routes.jsx</code>. New top-level URLs require a new <code>Route</code> entry and usually a page under <code>src/Pages/</code>.</p>
+
+  <hr />
+
+  <h2>Scripts</h2>
+  <table>
+    <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>npm install</code></td><td>Install dependencies</td></tr>
+      <tr><td><code>npm run dev</code></td><td>Local dev server (Vite)</td></tr>
+      <tr><td><code>npm run build</code></td><td>Production build → <code>dist/</code></td></tr>
+      <tr><td><code>npm run preview</code></td><td>Serve the production build locally</td></tr>
+      <tr><td><code>npm run lint</code></td><td>ESLint</td></tr>
+    </tbody>
+  </table>
+  <p>Use a current <strong>Node.js LTS</strong> version (e.g. 20.x or 22.x) unless your team standardizes otherwise.</p>
+
+  <hr />
+
+  <h2>How to add a new portfolio project</h2>
+  <p>Portfolio items are <strong>data-driven</strong> from <code>src/Datasets/portfolio.js</code> plus <strong>on-disk assets</strong> under <code>src/assets/Portfolio/</code>. URLs use a <strong>slug</strong> derived from <code>projectName</code> (see <code>toSlug</code> in the same file).</p>
+
+  <h3>1. Add asset folders and files</h3>
+  <ol>
+    <li>
+      Under <code>src/assets/Portfolio/&lt;DeveloperFolder&gt;/&lt;ProjectFolder&gt;/</code>, add:
+      <ul>
+        <li><strong>Project logo</strong> — a PNG whose filename contains <code>logo</code> (case-insensitive), placed directly under the project folder (not inside <code>Gallery/</code>). The glob in <code>portfolio.js</code> picks this up.</li>
+        <li><strong>Gallery</strong> — WebP images under a <strong><code>Gallery/</code></strong> subfolder. Supported patterns include:
+          <ul>
+            <li><code>Gallery/Image-1.webp</code>, <code>Gallery/Image-2.webp</code>, …</li>
+            <li><code>Gallery/Images/Image-*.webp</code></li>
+            <li><code>Gallery/Exteriors/Image-*.webp</code></li>
+            <li><code>Gallery/Interiors/Image-*.webp</code></li>
+          </ul>
+          Sorting prefers that order, then numeric image order.
+        </li>
+      </ul>
+    </li>
+    <li><strong>Developer folder names</strong> must match how the code resolves logos: e.g. <code>Meraas</code>, <code>Nakheel</code>, <code>Dubai Properties</code> (with a space, as in the repo).</li>
+  </ol>
+
+  <h3>2. Append an entry to <code>portfolioEntries</code></h3>
+  <p>Each object typically includes:</p>
+  <table>
+    <thead><tr><th>Field</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><code>masterCommunity</code></td><td>Area / master plan label (display)</td></tr>
+      <tr><td><code>developer</code></td><td><code>"Meraas"</code>, <code>"Nakheel"</code>, or <code>"DP"</code> (stored as <strong>Dubai Properties</strong> after normalization)</td></tr>
+      <tr><td><code>projectName</code></td><td>Display name; also drives the <strong>URL slug</strong> via <code>toSlug</code></td></tr>
+      <tr><td><code>launchDate</code></td><td>Shown in UI</td></tr>
+      <tr><td><code>toolkitLink</code></td><td>External broker/toolkit URL</td></tr>
+      <tr><td><code>assetDeveloperFolder</code></td><td>Folder under <code>src/assets/Portfolio/</code> (e.g. <code>Meraas</code>)</td></tr>
+      <tr><td><code>assetProjectFolder</code></td><td>Project subfolder (e.g. <code>Solaya</code>)</td></tr>
+      <tr><td><code>description</code></td><td>Optional; if omitted, a default blurb is generated</td></tr>
+    </tbody>
+  </table>
+  <p>Optional: <code>logo</code> (string label in data; branding in UI comes from images).</p>
+
+  <h3>3. Special case: logo path does not match folders</h3>
+  <p>If the logo lives under a <strong>different</strong> project folder (phases, aliases), add a row to <code>projectLogoAliases</code> in <code>portfolio.js</code> (key: <code>${assetDeveloperFolder}/${assetProjectFolder}</code> → value: path relative to <code>../assets/Portfolio/</code>).</p>
+
+  <h3>4. SEO: update the sitemap</h3>
+  <p>After adding or renaming a project, add or update the matching URL in <strong><code>public/sitemap.xml</code></strong>:</p>
+  <ul>
+    <li>Pattern: <code>https://www.tridentluxury.ae/portfolio/&lt;slug&gt;</code></li>
+    <li>Slug = output of <code>toSlug(projectName)</code> (lowercase, <code>&amp;</code> → <code>and</code>, non-alphanumeric runs → <code>-</code>).</li>
+  </ul>
+  <p><code>public/robots.txt</code> already references the sitemap; no change needed unless the domain changes.</p>
+
+  <h3>5. Verify locally</h3>
+  <p>Run <code>npm run dev</code>, open <code>/portfolio</code>, open the new card, and visit <code>/portfolio/&lt;your-slug&gt;</code> directly. Confirm gallery order, logos, and links.</p>
+
+  <hr />
+
+  <h2>Files intentionally excluded from Git</h2>
+  <p>Configured in <strong><code>.gitignore</code></strong>:</p>
+  <table>
+    <thead><tr><th>Pattern</th><th>Reason</th></tr></thead>
+    <tbody>
+      <tr><td><code>google-apps-script-code.gs</code></td><td>Backend script for Sheets; keep a <strong>private</strong> copy (not in the shared repo).</td></tr>
+      <tr><td><code>dist/</code>, <code>dist.zip</code>, <code>dist*.zip</code></td><td>Build output and archives should not be versioned.</td></tr>
+      <tr><td><code>node_modules/</code>, logs, editor junk</td><td>Standard</td></tr>
+    </tbody>
+  </table>
+  <p>If any of these were <strong>already committed</strong>, remove them from the index once (they stay on disk):</p>
+  <pre>git rm --cached google-apps-script-code.gs dist.zip 2&gt;/dev/null; true</pre>
+  <p>Then commit. Going forward, Git will not suggest adding them.</p>
+
+  <hr />
+
+  <h2>Handoff notes for other developers</h2>
+
+  <h3>Deployment and hosting</h3>
+  <p>The app is an <strong>SPA</strong>: every path (e.g. <code>/portfolio/foo</code>) must serve <strong><code>index.html</code></strong> on the server, with static files (<code>/assets/...</code>, <code>robots.txt</code>, <code>sitemap.xml</code>, favicons) served as files. Misconfigured hosts return 404 on direct URL loads or refresh.</p>
+
+  <h3>Forms and Google integration</h3>
+  <p>Contact / lead submission uses <strong><code>src/Utils/emailService.js</code></strong>, which posts to a <strong>Google Apps Script</strong> web app URL (<code>GOOGLE_SCRIPT_URL</code>). Treat that endpoint as <strong>sensitive</strong>: it can write to your Sheet and may be abused if leaked. For a cleaner handoff, consider moving the URL to a <strong>Vite env variable</strong> (e.g. <code>VITE_GOOGLE_SCRIPT_URL</code> in <code>.env.local</code>, documented in a private runbook) and reading <code>import.meta.env.VITE_GOOGLE_SCRIPT_URL</code> in code. <code>.env.local</code> should stay gitignored (confirm <code>.gitignore</code> includes <code>.env*.local</code> if you add secrets files).</p>
+
+  <h3>Domain and metadata</h3>
+  <p>Canonical domain in meta tags is <strong><code>https://www.tridentluxury.ae</code></strong> (<code>index.html</code>). Align redirects, <code>sitemap.xml</code>, and <code>robots.txt</code> with your real canonical host (www vs non-www).</p>
+
+  <h3>Performance and repo size</h3>
+  <p><strong><code>src/assets/Portfolio/</code></strong> contains many high-resolution WebPs and some PDFs. Clones can be large; avoid committing duplicate or unused assets.</p>
+
+  <h3>Styling conventions</h3>
+  <p>Component-scoped <strong><code>.scss</code></strong> files sit next to their <code>.jsx</code> counterparts. Follow existing nesting and naming when adding sections.</p>
+
+  <h3>Lint and quality</h3>
+  <p>Run <strong><code>npm run lint</code></strong> before merging. Fix new issues in touched files.</p>
+
+  <h3>Optional internal copy</h3>
+  <p>Keep <strong><code>google-apps-script-code.gs</code></strong> (or equivalent) in a <strong>private</strong> store (password manager, internal wiki, or separate private repo) with deployment steps for Google Apps Script, Sheet ID, and access scopes.</p>
+
+  <hr />
+
+  <h2>License / usage</h2>
+  <p>This repository is <strong>private</strong> to Trident Luxury unless otherwise stated. Do not redistribute client assets or third-party broker toolkits outside agreed terms.</p>
+
+</body>
+</html>
